@@ -9,17 +9,17 @@ import java.time.Duration;
 
 public class HomePage
 {
-  private final WebDriver driver_;
-  By userName=By.xpath("//*[@data-l='t,userPage']");
+  private final WebDriver driver;
+  private static final By userName = By.xpath("//*[@data-l='t,userPage']");
 
   public HomePage(WebDriver driver)
   {
-    this.driver_=driver;
+    this.driver = driver;
   }
 
   public String getUserName()
   {
-    WebElement firstResult=new WebDriverWait(driver_, Duration.ofSeconds(10)).until(driver_ -> driver_.findElement(userName));
+    WebElement firstResult = new WebDriverWait(driver, Duration.ofSeconds(10)).until(driver_ -> driver_.findElement(userName));
     return firstResult.getText();
   }
 }

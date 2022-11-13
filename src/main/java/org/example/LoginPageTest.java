@@ -1,35 +1,22 @@
 package org.example;
 
 import org.junit.Assert;
-import org.junit.Before;
+
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static org.example.Constants.*;
 
-public class LoginPageTest
+
+public class LoginPageTest extends BaseTest
 {
-  public WebDriver driver_;
-
-  public LoginPageTest()
-  {
-  }
-
-  @Before
-  public void setup()
-  {
-    System.setProperty(DRIVER_NAME, DRIVER_PATH);
-    driver_=new FirefoxDriver();
-    driver_.get(URL);
-  }
-
+  public static final String LOGIN="technoPol30";
+  public static final String PASSWORD="technoPolis2022";
+  public static final String USERNAME="Bot Receiver";
   @Test
   public void entry()
   {
-    LoginPage loginPage=new LoginPage(driver_);
+    setup(); //- если раскоментить setup, все заработает
+    LoginPage loginPage=new LoginPage(driver);
     HomePage homePage=loginPage.loginAs(LOGIN, PASSWORD);
     Assert.assertEquals(homePage.getUserName(), USERNAME);
-    driver_.close();
   }
 }

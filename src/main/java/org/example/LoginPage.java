@@ -1,47 +1,49 @@
 package org.example;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import static org.example.Constants.TITTLE;
+import org.openqa.selenium.WebElement;
 
 public class LoginPage
 {
-  By usernameLocator_=By.xpath("//*[@id=\"field_email\"]");
-  By passwordLocator_=By.xpath("//*[@id=\"field_password\"]");
-  By loginButtonLocator_=By.xpath("//*[@value='Войти в Одноклассники']");
-
-  private final WebDriver driver_;
+  private final By USERNAME_LOCATOR=By.xpath("//*[@id=\"field_email\"]");
+  private final By PASSWORD_LOCATOR=By.xpath("//*[@id=\"field_password\"]");
+  private final By LOGIN_BUTTON_LOCATOR=By.xpath("//*[@value='Войти в Одноклассники']");
+  private final WebDriver driver;
 
   public LoginPage(WebDriver driver)
   {
-    this.driver_=driver;
-    if (!TITTLE.equals(driver_.getTitle()))
-    {
-      throw new IllegalStateException("Not a login page");
-    }
+    this.driver=driver;
+    By LOGIN_FORM_LOCATOR = By.xpath("//*[@id='hook_Block_AnonymMain']");
+    Assert.assertNotNull(driver.findElement(LOGIN_FORM_LOCATOR));
+    Assert.assertNotNull(driver.findElement(USERNAME_LOCATOR));
+    Assert.assertNotNull(driver.findElement(PASSWORD_LOCATOR));
+    Assert.assertNotNull(driver.findElement(LOGIN_BUTTON_LOCATOR));
   }
 
   public void typeUsername(String username)
   {
-    driver_.findElement(usernameLocator_).sendKeys(username);
+    driver.findElement(USERNAME_LOCATOR).sendKeys(username);
   }
 
   public void typePassword(String password)
   {
-    driver_.findElement(passwordLocator_).sendKeys(password);
+    driver.findElement(PASSWORD_LOCATOR).sendKeys(password);
   }
 
-  public HomePage submitLogin()
+  public void submitLogin()
   {
-    driver_.findElement(loginButtonLocator_).submit();
-    return new HomePage(driver_);
+    WebElement elem = driver.findElement(LOGIN_BUTTON_LOCATOR);
+    Assert.assertNotNull(elem);
+    elem.submit();
   }
 
   public HomePage loginAs(String username, String password)
   {
     typeUsername(username);
     typePassword(password);
-    return submitLogin();
+    submitLogin();
+    return new HomePage(driver);
   }
 }
