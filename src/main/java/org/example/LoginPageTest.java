@@ -1,10 +1,8 @@
 package org.example;
 
 import org.junit.Assert;
-
-import org.junit.Test;
-
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class LoginPageTest extends BaseTest
 {
@@ -14,9 +12,8 @@ public class LoginPageTest extends BaseTest
   @Test
   public void entry()
   {
-    setup(); //- если раскоментить setup, все заработает
     LoginPage loginPage=new LoginPage(driver);
     HomePage homePage=loginPage.loginAs(LOGIN, PASSWORD);
-    Assert.assertEquals(homePage.getUserName(), USERNAME);
+    Assertions.assertEquals(homePage.getUserName(), USERNAME);
   }
 }
