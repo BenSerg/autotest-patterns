@@ -17,7 +17,11 @@ public class LoginPage
   {
     this.driver = driver;
     By LOGIN_FORM_LOCATOR = By.xpath("//*[@id='hook_Block_AnonymMain']");
-    Assertions.assertAll(() -> assertNotNull(driver.findElement(LOGIN_FORM_LOCATOR)), () -> assertNotNull(driver.findElement(USERNAME_LOCATOR)), () -> assertNotNull(driver.findElement(PASSWORD_LOCATOR)), () -> assertNotNull(driver.findElement(LOGIN_BUTTON_LOCATOR)));
+    Assertions.assertAll(
+      () -> assertNotNull(driver.findElement(LOGIN_FORM_LOCATOR)),
+      () -> assertNotNull(driver.findElement(USERNAME_LOCATOR)),
+      () -> assertNotNull(driver.findElement(PASSWORD_LOCATOR)),
+      () -> assertNotNull(driver.findElement(LOGIN_BUTTON_LOCATOR)));
   }
 
   public void typeUsername(String username)
