@@ -1,18 +1,16 @@
 package org.example;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LoginPageTest extends BaseTest
 {
-  public static final String LOGIN="technoPol30";
-  public static final String PASSWORD="technoPolis2022";
-  public static final String USERNAME="Bot Receiver";
-  @Test
-  public void entry()
+  @ParameterizedTest
+  @ValueSource(strings = {"Bot Receiver"})
+  public void entry(String username)
   {
-    LoginPage loginPage=new LoginPage(driver);
-    HomePage homePage=loginPage.loginAs(LOGIN, PASSWORD);
-    Assertions.assertEquals(homePage.getUserName(), USERNAME);
+    Assertions.assertEquals(userPage.getUserName(), username);
   }
 }

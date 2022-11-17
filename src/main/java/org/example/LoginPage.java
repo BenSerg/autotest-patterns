@@ -1,25 +1,26 @@
 package org.example;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LoginPage
 {
-  private final By USERNAME_LOCATOR=By.xpath("//*[@id=\"field_email\"]");
-  private final By PASSWORD_LOCATOR=By.xpath("//*[@id=\"field_password\"]");
-  private final By LOGIN_BUTTON_LOCATOR=By.xpath("//*[@value='Войти в Одноклассники']");
+  private static final By USERNAME_LOCATOR = By.xpath("//*[@id=\"field_email\"]");
+  private static final By PASSWORD_LOCATOR = By.xpath("//*[@id=\"field_password\"]");
+  private static final By LOGIN_BUTTON_LOCATOR = By.xpath("//*[@value='Войти в Одноклассники']");
   private final WebDriver driver;
-
   public LoginPage(WebDriver driver)
   {
-    this.driver=driver;
+    this.driver = driver;
     By LOGIN_FORM_LOCATOR = By.xpath("//*[@id='hook_Block_AnonymMain']");
-    Assert.assertNotNull(driver.findElement(LOGIN_FORM_LOCATOR));
-    Assert.assertNotNull(driver.findElement(USERNAME_LOCATOR));
-    Assert.assertNotNull(driver.findElement(PASSWORD_LOCATOR));
-    Assert.assertNotNull(driver.findElement(LOGIN_BUTTON_LOCATOR));
+    Assertions.assertAll(
+      () -> assertNotNull(driver.findElement(LOGIN_FORM_LOCATOR)),
+      () -> assertNotNull(driver.findElement(USERNAME_LOCATOR)),
+      () -> assertNotNull(driver.findElement(PASSWORD_LOCATOR)),
+      () -> assertNotNull(driver.findElement(LOGIN_BUTTON_LOCATOR)));
   }
 
   public void typeUsername(String username)
@@ -34,16 +35,14 @@ public class LoginPage
 
   public void submitLogin()
   {
-    WebElement elem = driver.findElement(LOGIN_BUTTON_LOCATOR);
-    Assert.assertNotNull(elem);
-    elem.submit();
+    driver.findElement(LOGIN_BUTTON_LOCATOR).submit();
   }
 
-  public HomePage loginAs(String username, String password)
+  public UserPage loginAs(TestBot testBot)
   {
-    typeUsername(username);
-    typePassword(password);
+    typeUsername(testBot.getLogin());
+    typePassword(testBot.getPassword());
     submitLogin();
-    return new HomePage(driver);
+    return new UserPage(driver);
   }
 }
