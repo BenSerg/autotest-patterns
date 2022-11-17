@@ -12,15 +12,12 @@ public class LoginPage
   private static final By PASSWORD_LOCATOR = By.xpath("//*[@id=\"field_password\"]");
   private static final By LOGIN_BUTTON_LOCATOR = By.xpath("//*[@value='Войти в Одноклассники']");
   private final WebDriver driver;
+
   public LoginPage(WebDriver driver)
   {
     this.driver = driver;
     By LOGIN_FORM_LOCATOR = By.xpath("//*[@id='hook_Block_AnonymMain']");
-    Assertions.assertAll(
-      () -> assertNotNull(driver.findElement(LOGIN_FORM_LOCATOR)),
-      () -> assertNotNull(driver.findElement(USERNAME_LOCATOR)),
-      () -> assertNotNull(driver.findElement(PASSWORD_LOCATOR)),
-      () -> assertNotNull(driver.findElement(LOGIN_BUTTON_LOCATOR)));
+    Assertions.assertAll(() -> assertNotNull(driver.findElement(LOGIN_FORM_LOCATOR)), () -> assertNotNull(driver.findElement(USERNAME_LOCATOR)), () -> assertNotNull(driver.findElement(PASSWORD_LOCATOR)), () -> assertNotNull(driver.findElement(LOGIN_BUTTON_LOCATOR)));
   }
 
   public void typeUsername(String username)

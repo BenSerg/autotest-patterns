@@ -12,14 +12,17 @@ public class TestBot
     this.password = password;
     this.name = name;
   }
+
   public String getLogin()
   {
     return this.login;
   }
+
   public String getPassword()
   {
     return this.password;
   }
+
   public String getName()
   {
     return this.name;
