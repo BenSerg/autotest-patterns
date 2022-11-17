@@ -31,14 +31,14 @@ public class UserPage
 
   public UserPage createPost()
   {
-    driver.findElement(POSTING_LOCATOR).click();
+    new WebDriverWait(driver, Duration.ofSeconds(10)).until(driver -> driver.findElement(POSTING_LOCATOR)).click();
     return this;
   }
 
   public UserPage writePost(String message)
   {
     new WebDriverWait(driver, Duration.ofSeconds(30)).until(driver -> driver.findElement(WRITING_LOCATOR)).sendKeys(message);
-    driver.findElement(SHARE_BUTTON).click();
+    new WebDriverWait(driver, Duration.ofSeconds(10)).until(driver -> driver.findElement(SHARE_BUTTON)).click();
     return this;
   }
   public String getLastPostMessage()

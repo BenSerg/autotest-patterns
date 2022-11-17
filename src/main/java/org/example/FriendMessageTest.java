@@ -18,8 +18,8 @@ public class FriendMessageTest extends BaseTest
   @Test
   public void friendMsgTest()
   {
-    new WebDriverWait(driver, Duration.ofSeconds(20)).until(driver -> driver.findElement(FRIENDS_BUTTON)).click();
-    List< WebElement > list = new WebDriverWait(driver, Duration.ofSeconds(25)).until(driver -> driver.findElements(GRID_CARD_LOCATOR));
+    new WebDriverWait(driver, Duration.ofSeconds(10)).until(driver -> driver.findElement(FRIENDS_BUTTON)).click();
+    List< WebElement > list = new WebDriverWait(driver, Duration.ofSeconds(10)).until(driver -> driver.findElements(GRID_CARD_LOCATOR));
     ArrayList<FriendCard> friendCards = new ArrayList<>();
     for (WebElement elem : list)
     {
